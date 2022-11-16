@@ -18,6 +18,12 @@ const Square = ({value, onClickSquare, index}) => {
         return <Square onClickSquare={onClickSquare} index={i} value={squares[i]}/>
     }
     
+    React.useEffect(() => {
+      if (calculateWinner(squares)) {
+        setWinnter(calculateWinner(squares))
+      }
+    }, [squares])
+
     const onClickSquare = (index) => {
       if (!winner) {
         if (squares[index] === null) {
@@ -25,9 +31,6 @@ const Square = ({value, onClickSquare, index}) => {
           const arr = squares.slice()
           arr[index] = status
           setSquares(arr)
-          if (calculateWinner(squares)) {
-            setWinnter(calculateWinner(squares))
-          }
         }
       }
     }
